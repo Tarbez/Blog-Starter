@@ -1,0 +1,158 @@
+---
+title: 'Create your FREE Nextjs blog with MDX and Tailwind (Markdown)'
+date: 2022-06-13T17:32:14Z
+lastmod: '2022-06-14'
+tags: ['next-js', 'mdx', 'markdown', 'blog-starter']
+draft: false
+summary: 'How to easily start your FREE Nextjs blog with MDX'
+images: '/static/images/canada/mountains.jpg'
+layout: PostSimple
+bibliography: references-data.bib
+canonicalUrl: https://tailwind-nextjs-starter-blog.vercel.app/blog/new-features-in-v1/
+authors: ['default']
+---
+
+## Overview
+
+This is a [Next.js](https://nextjs.org), [Tailwind CSS](https://nextjs.org) blogging starter template customised by CR3TV. Probably the most feature-rich Next.js markdown blogging template out there. Comes out of the box configured with the latest technologies to make technical writing a breeze. Before we start our tutorial, we would like to give a special thanks to Timothy and all the contributors for taking the time to put this together. Thank you! We appreciate your time!
+
+We are using [Tailwind Nextjs Starter Blog](https://github.com/timlrx/tailwind-nextjs-starter-blog). We are going to transform the entire design of the blog and add aditional libraries that meet our Brand needs. You can download our custom repo [Tailwind Nextjs Blog Template Customised by CR3TV](https://github.com/timlrx/tailwind-nextjs-starter-blog).
+
+<TOCInline toc={props.toc} exclude="Overview" asDisclosure toHeading={3} />
+
+## Quick Start Guide
+
+1. JS (official support) - `npx degit https://github.com/timlrx/tailwind-nextjs-starter-blog.git` or TS (community support) - `npx degit timlrx/tailwind-nextjs-starter-blog#typescript`
+2. Personalize `siteMetadata.js` (site related information)
+3. Modify the content security policy in `next.config.js` if you want to use
+   any analytics provider or a commenting solution other than giscus.
+4. Personalize `authors/default.md` (main author)
+5. Modify `projectsData.js`
+6. Modify `headerNavLinks.js` to customize navigation links
+7. Add blog posts
+8. Deploy on Vercel
+
+### Development
+
+First, run the development server:
+
+```bash
+npm start
+# or
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+
+### Extend / Customize
+
+`data/siteMetadata.js` - contains most of the site related information which should be modified for a user's need.
+
+`data/authors/default.md` - default author information (required). Additional authors can be added as files in `data/authors`.
+
+`data/projectsData.js` - data used to generate styled card on the projects page.
+
+`data/headerNavLinks.js` - navigation links.
+
+`data/logo.svg` - replace with your own logo.
+
+`data/blog` - replace with your own blog posts.
+
+`public/static` - store assets such as images and favicons.
+
+`tailwind.config.js` and `css/tailwind.css` - contain the tailwind stylesheet which can be modified to change the overall look and feel of the site.
+
+`css/prism.css` - controls the styles associated with the code blocks. Feel free to customize it and use your preferred prismjs theme e.g. [prism themes](https://github.com/PrismJS/prism-themes).
+
+`components/social-icons` - to add other icons, simply copy an svg file from [Simple Icons](https://simpleicons.org/) and map them in `index.js`. Other icons use [heroicons](https://heroicons.com/).
+
+`components/MDXComponents.js` - pass your own JSX code or React component by specifying it over here. You can then call them directly in the `.mdx` or `.md` file. By default, a custom link and image component is passed.
+
+`layouts` - main templates used in pages.
+
+`pages` - pages to route to. Read the [Next.js documentation](https://nextjs.org/docs) for more information.
+
+`next.config.js` - configuration related to Next.js. You need to adapt the Content Security Policy if you want to load scripts, images etc. from other domains.
+
+## Theme Colors Configuration
+
+Tailwind comes with a decently crafted color palette out-of-the-box that is a great starting point if you don't have your own specific branded palettes. [You can can find Tailwind available colors here.](https://tailwindcss.com/docs/customizing-colors)
+
+### Tailwind color palettes
+
+```js:tailwind.config.js
+theme: {
+    colors: {
+      primary: colors.teal,
+      gray: colors.neutral,
+      sky: colors.sky,
+      // add your selected colors here as listed above
+    }
+  ...
+}
+```
+
+### Custom Brand color palettes
+
+If you have a specific color palettes for your brand then you can include them with few lines of code and they would be integrated within Tailwind framework then you can use them throughout your entire project. We have listed an example below that you can replicate with your own custom colors.
+
+```js:tailwind.config.js
+theme: {
+    colors: {
+   KeenLight: {
+          3: "rgba(218, 228, 253, 0.03)",
+          7: "rgba(218, 228, 253, 0.07)",
+          11: "rgba(218, 228, 253, 0.11)",
+          22: "rgba(218, 228, 253, 0.22)",
+          33: "rgba(218, 228, 253, 0.33)",
+          ...
+        },
+        KeenDark: {
+          3: "rgba(28, 30, 43, 0.03)",
+          7: "rgba(28, 30, 43, 0.07)",
+          11: "rgba(28, 30, 43, 0.11)",
+          22: "rgba(28, 30, 43, 0.22)",
+          33: "rgba(28, 30, 43, 0.33)",
+          50: "rgba(28, 30, 43, 0.50)",
+          ...
+        },
+    }
+  ...
+}
+```
+
+### How to use the colors
+
+It is quite easy to use Tailwind colors or your custom made colors, see the example below.
+
+```html
+<div className="bg-KeenDark-33 dark:bg-KeenLight-7">{Your Content}</div>
+```
+
+## Xdm MDX compiler
+
+The template uses [xdm](https://github.com/wooorm/xdm) under the hood, the latest micromark 3 and remark, rehype libraries. [read more here.](https://tailwind-nextjs-starter-blog.vercel.app/blog/new-features-in-v1#xdm-mdx-compiler)
+
+### How to load components directly to your markdown
+
+The default configuration resolves all components relative to the `/components` directory.
+You can easily reuse all the components that you have built within your component directory in your markdown files.
+
+**Note**:
+Components which require external image loaders also require additional esbuild configuration.
+Components which are dependent on global application state on lifecycle like the Nextjs `Link` component would also not work with this setup as each mdx file is built independently.
+For such cases, it is better to use component substitution.
+
+```jsx
+import PageTitle from './PageTitle.js'
+;<PageTitle> This is PageTitle Component</PageTitle>
+```
+
+import PageTitle from './PageTitle.js'
+
+<div className="text-orange-300">
+  Preview:
+  <PageTitle className="text-orange-300"> This is PageTitle Component</PageTitle>
+</div>
